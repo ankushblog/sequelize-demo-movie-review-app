@@ -6,6 +6,7 @@ var userCtrl = require('./routers/user');
 
 const auth = require('./middleware/authentication')
 
+app.use(express.json())
 
 const port = 3020
 
@@ -23,19 +24,19 @@ app.get('/queryData', userCtrl.queryData)
 app.get('/finder', userCtrl.finderData)
 
 
-app.post('/users', userCtrl.addUser)
+ app.post('/users', userCtrl.addUser)
 
-app.post('/users/login', userCtrl.loginUser)
+// app.post('/users/login', userCtrl.loginUser)
 
-app.get('/users/me', auth, userCtrl.userProfile)
+// app.get('/users/me', auth, userCtrl.userProfile)
 
-app.post('/users/logout', auth, userCtrl.logout)
+// app.post('/users/logout', auth, userCtrl.logout)
 
-app.post('/users/logoutall', auth, userCtrl.logoutAll)
+// app.post('/users/logoutall', auth, userCtrl.logoutAll)
 
-app.patch('/users/:id', auth, userCtrl.updateUser)
+// app.patch('/users/:id', auth, userCtrl.updateUser)
 
-app.delete('/users/:id', auth, userCtrl.deleteUser)
+// app.delete('/users/:id', auth, userCtrl.deleteUser)
 
 
 app.listen(port, () => {

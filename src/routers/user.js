@@ -1,19 +1,19 @@
 const { response } = require('express');
-var db = require('..');
-require('../models/users')
-const Users = db.users;
+var db = require('../index');
+require('../models/user')
+const User = db.user;
 
 const { Sequelize, Op } = require('sequelize');
 
 
 var addUser1 = async (req, res) => {
 
-    // let data = await Users.create({ name: 'shyam', email: 'shyam@gmal.com', age: '28' });
+    let data = await User.create({ name: 'ankush', email: 'ankush@gmail.com', age: '28' });
 
-    // let response = {
-    //     data: 'ok'
-    // }
-    // res.status(200).json(response)
+    let response = {
+        data: 'ok'
+    }
+    res.status(200).json(response)
 }
 
 //all CRUD operations
@@ -140,10 +140,15 @@ var finderData = async (req, res) => {
 
 //add user to database
 var addUser = async (req, res) => {
-    // const user = new User(req.body);
+
+    const user = User.create(req.body);
+
+     res.send(user)
+    // console.log(req.body)
 
     // try {
-    //     await user.save();
+    //   //  await user.save();
+
     //     const token = await user.generateAuthenticationToken()
     //     res.status(201).send({ user, token });
     // } catch (e) {
@@ -155,48 +160,48 @@ var addUser = async (req, res) => {
 }
 
 
-//user Login
-var loginUser = async (req, res) => {
-    try {
-        const user = await User.findByIdPassword(req.body.email, req.body.password)
-        const token = await user.generateAuthenticationToken()
+// //user Login
+// var loginUser = async (req, res) => {
+//     try {
+//         const user = await User.findByIdPassword(req.body.email, req.body.password)
+//         const token = await user.generateAuthenticationToken()
 
-        //res.send(user)
-        // const pass = req.body.password;
-        // const emailid = req.body.email;
+//         //res.send(user)
+//         // const pass = req.body.password;
+//         // const emailid = req.body.email;
 
-        // res.send({ pass, emailid })
-        res.send({ user, token })
+//         // res.send({ pass, emailid })
+//         res.send({ user, token })
 
-    } catch (e) {
-        res.send('user not found')
-    }
-}
+//     } catch (e) {
+//         res.send('user not found')
+//     }
+// }
 
-//display user profile
-var userProfile = async (req, res) => {
+// //display user profile
+// var userProfile = async (req, res) => {
 
-}
+// }
 
-//user logout
-var logout = async (req, res) => {
+// //user logout
+// var logout = async (req, res) => {
 
-}
+// }
 
-//logout from all sessions
-var logoutAll = async (req, res) => {
+// //logout from all sessions
+// var logoutAll = async (req, res) => {
 
-}
+// }
 
-//update user information
-var updateUser = async (req, res) => {
+// //update user information
+// var updateUser = async (req, res) => {
 
-}
+// }
 
-//delete user
-var deleteUser = async (req, res) => {
+// //delete user
+// var deleteUser = async (req, res) => {
 
-}
+// }
 
 module.exports = {
 
@@ -204,13 +209,13 @@ module.exports = {
     crudOperation,
     queryData,
     finderData,
-    addUser,
-    loginUser,
-    userProfile,
-    logout,
-    logoutAll,
-    updateUser,
-    deleteUser
+    addUser
+    // loginUser,
+    // userProfile,
+    // logout,
+    //logoutAll,
+    // updateUser,
+    // deleteUser
 }
 
 
