@@ -4,7 +4,6 @@ var validator = require('validator');
 
 //fields of movie model
 
-
 module.exports = (sequelize, Datatypes) => {
 
     const Movie = sequelize.define('Movie', {

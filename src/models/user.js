@@ -27,7 +27,8 @@ module.exports = (sequelize, DataTypes) => {
 
     })
 
-    User.prototype.generateAuthToken = async function () {
+    //function for authentication token
+    User.prototype.generateAuthenticationToken = async function () {
         const user = this
 
         const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET)
@@ -38,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
         return token
     }
 
-    User.findByCredentials = async (email, password) => {
+    User.findByIdPassword = async (email, password) => {
         const user = await User.findOne({ where: { email: email } })
         if (!user) {
             throw new Error('Unable to Login')

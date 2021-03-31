@@ -3,6 +3,8 @@ const app = express();
 
 require('./index')
 var userCtrl = require('./routers/user');
+var movieCtrl = require('./routers/movie');
+
 
 const auth = require('./middleware/authentication')
 
@@ -14,29 +16,42 @@ app.get('/', (req, res) => {
     res.send('hello from new app')
 })
 
-
-app.get('/add', userCtrl.addUser1)
-
-app.get('/crud', userCtrl.crudOperation)
-
-app.get('/queryData', userCtrl.queryData)
-
-app.get('/finder', userCtrl.finderData)
+//sequelize demo testing API's
+app.get('/addDemo', userCtrl.addDemo)
 
 
- app.post('/users', userCtrl.addUser)
+//user API's
 
-// app.post('/users/login', userCtrl.loginUser)
+app.post('/users', userCtrl.addUser)
 
-// app.get('/users/me', auth, userCtrl.userProfile)
+app.post('/users/login', userCtrl.loginUser)
 
-// app.post('/users/logout', auth, userCtrl.logout)
+app.get('/users/me', auth, userCtrl.userProfile)
 
-// app.post('/users/logoutall', auth, userCtrl.logoutAll)
+ app.post('/users/logout', auth, userCtrl.logout)
 
-// app.patch('/users/:id', auth, userCtrl.updateUser)
+ app.patch('/users/:id', auth, userCtrl.updateUser)
 
-// app.delete('/users/:id', auth, userCtrl.deleteUser)
+ app.delete('/users/:id', auth, userCtrl.deleteUser)
+
+
+//movies API's
+
+ app.post('/movies', auth, movieCtrl.addMovie)
+
+ app.get("/movies/all",movieCtrl.allMovies)
+
+ app.get("/movies/:id",auth,movieCtrl.findMovie)
+
+ app.patch("/movies/:id", auth,movieCtrl.updateMovie)
+
+ app.delete('/movies/:id', auth,movieCtrl.deleteMovie)
+
+ app.post('/movies/:id',auth,movieCtrl.addMoviePoster)
+
+ app.get('/movies/:id/avatar',auth,movieCtrl.displayMoviePoster)
+
+ app.delete('/movies/:id/avatar', auth,movieCtrl.deleteMoviePoster)
 
 
 app.listen(port, () => {
